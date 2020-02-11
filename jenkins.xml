@@ -49,11 +49,10 @@ export BUILD_PATH="#{BUILD_PATH}"
 
 docker/shell -v -a -c "package.sh"
 
-rm -Rf "$BUILD_PATH"
 mkdir -p "$BUILD_PATH"
-for folder in bin lib public ; do
-  cp -R "docker/runtime/$folder" "$BUILD_PATH"
-done
+
+cd docker/runtime
+tar -czvf "$BUILD_PATH/$BUILD_NUMBER.tar.gz" bin lib public
 </command>
     </hudson.tasks.Shell>
   </builders>
