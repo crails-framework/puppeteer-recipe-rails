@@ -8,7 +8,6 @@ psql_version=`./get_psql_version`
 psql_database_path="/var/lib/postgresql/data"
 psql_pid_path="$psql_database_path/postmaster.pid"
 psql_service="/usr/lib/postgresql/$psql_version/bin/pg_ctl -D $psql_database_path -l /var/lib/postgresql/log"
-monit_conf="/etc/monit/conf.d/pgsql"
 
 apt-get install -y postgresql
 
@@ -25,7 +24,6 @@ else
 fi
 
 cp pg_hba.conf "$psql_database_path"/pg_hba.conf
-psql_service=$psql_service psql_pid=$psql_pid bash postgresql.monit
 
 pg_isready || su postgres -c "$psql_service start"
 

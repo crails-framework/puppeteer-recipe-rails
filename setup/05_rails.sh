@@ -5,7 +5,6 @@ source ./variables 2> /dev/null
 mkdir -p "$APP_PATH"
 mkdir -p "$APP_PATH/runtime"
 
-bash rails.monit > /etc/monit/conf.d/$INSTANCE_NAME-server
 bash rails.env   > "$APP_PATH/env"
 cp rails.launch "$APP_PATH/runtime/launch.sh"
 cp rails.stop   "$APP_PATH/runtime/stop.sh"
