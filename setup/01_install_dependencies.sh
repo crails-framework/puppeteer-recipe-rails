@@ -17,4 +17,8 @@ apt-get install -y \
   nodejs \
   ruby \
 
-gem install bundler
+if [[ -z "$RUBY_BUNDLER_VERSION" ]] ; then
+  gem install bundler
+else
+  gem install bundler -v $RUBY_BUNDLER_VERSION
+fi
