@@ -3,4 +3,4 @@
 source ./variables 2> /dev/null
 
 cd "$APP_PATH/runtime"
-./launch.sh
+su $APP_USER -c ./launch.sh
