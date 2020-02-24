@@ -4,12 +4,13 @@ source ./variables 2> /dev/null
 
 chmod +x get_psql_version
 
-psql_version=`./get_psql_version`
 psql_database_path="/var/lib/postgresql/data"
 psql_pid_path="$psql_database_path/postmaster.pid"
 psql_service="/usr/lib/postgresql/$psql_version/bin/pg_ctl -D $psql_database_path -l /var/lib/postgresql/log"
 
 apt-get install -y postgresql
+
+psql_version=`./get_psql_version`
 
 #
 # initialize database
