@@ -4,10 +4,4 @@ current_dir=`dirname $0`
 cd $current_dir
 source ../env
 
-rsync -rq \
-  --exclude tmp \
-  --exclude launch.sh \
-  --exclude stop.sh \
-  "$BUILD_PATH" .
-
 bundle exec rails s -p $APP_PORT -d

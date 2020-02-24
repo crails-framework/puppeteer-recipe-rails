@@ -47,12 +47,14 @@ export INTERACTIVE_SHELL=false
 export BUILD_OPTIONS="#{BUILD_OPTIONS}"
 export BUILD_PATH="#{BUILD_PATH}"
 
-docker/shell -v -a -c "package.sh"
+docker/shell -v -a -c "docker/scripts/package.sh"
 
 mkdir -p "$BUILD_PATH"
 
 cd docker/runtime
-tar -czvf "$BUILD_PATH/$BUILD_NUMBER.tar.gz" bin lib public
+tar -czvf "$BUILD_PATH/$BUILD_NUMBER.tar.gz" *
+
+#{BUILD_AUTO_DEPLOY_COMMAND}
 </command>
     </hudson.tasks.Shell>
   </builders>
