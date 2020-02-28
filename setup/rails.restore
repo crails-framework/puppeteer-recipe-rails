@@ -1,0 +1,9 @@
+if [[ -f "$APP_PATH/runtime/restore.sh" ]] ; then
+  cd "$APP_PATH/runtime"
+  ./restore.sh
+else
+  su postgres -c "pg_dump $APP_PSQL_DATABASE > \"$BACKUP_DIR/database.sql\""
+  rm -Rf "$APP_PATH/runtime"
+  cp -R "$BACKUP_DIR/storage" "$APP_PATH/runtime"
+fi
+
