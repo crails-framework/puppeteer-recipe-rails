@@ -4,4 +4,5 @@ if [[ -f "$APP_PATH/runtime/backup.sh" ]] ; then
 else
   su postgres -c "pg_dump $APP_PSQL_DATABASE > \"$BACKUP_DIR/database.sql\""
   cp -R "$APP_PATH/runtime/storage" "$BACKUP_DIR/storage"
+  cp "$APP_PATH/env" "$BACKUP_DIR/env"
 fi
