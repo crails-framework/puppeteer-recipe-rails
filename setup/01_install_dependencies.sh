@@ -15,7 +15,11 @@ apt-get install -y \
   libxslt1.1 \
   rsync \
   nodejs \
-  ruby \
+  ruby
+
+if [[ ! -z "$REQUIRE_PACKAGES" ]] ; then
+  apt-get install -y $REQUIRE_PACKAGES
+fi
 
 if [[ -z "$RUBY_BUNDLER_VERSION" ]] ; then
   gem install bundler
