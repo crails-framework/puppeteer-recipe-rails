@@ -52,7 +52,7 @@ docker/shell -v -a -c "docker/scripts/package.sh"
 mkdir -p "$BUILD_PATH"
 
 cd docker/runtime
-tar -czvf "$BUILD_PATH/$BUILD_NUMBER.tar.gz" *
+tar -czf "$BUILD_PATH/$BUILD_NUMBER.tar.gz" *
 
 #{BUILD_AUTO_DEPLOY_COMMAND}
 </command>
