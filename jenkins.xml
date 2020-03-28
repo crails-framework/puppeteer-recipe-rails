@@ -49,7 +49,7 @@ export BUILD_PATH="#{BUILD_PATH}"
 
 docker/shell -v -a -c "docker/scripts/package.sh"
 
-mkdir -p "$BUILD_PATH"
+mkdir -m 770 -p "$BUILD_PATH"
 
 cd docker/runtime
 tar -czf "$BUILD_PATH/$BUILD_NUMBER.tar.gz" *
