@@ -2,6 +2,7 @@ if [[ -f "$APP_PATH/runtime/backup.sh" ]] ; then
   cd "$APP_PATH/runtime"
   ./backup.sh
 else
+  (umask 0 && touch "$BACKUP_DIR/database.sql")
   su postgres -c "pg_dump $APP_PSQL_DATABASE > \"$BACKUP_DIR/database.sql\""
   cp -R "$APP_PATH/runtime/storage" "$BACKUP_DIR/storage"
   cp "$APP_PATH/env" "$BACKUP_DIR/env"
