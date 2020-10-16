@@ -12,6 +12,10 @@ apt-get install -y postgresql
 
 psql_version=`./get_psql_version`
 
+if [[ -z "$APP_PSQL_DATABASE" ]] ; then
+  export APP_PSQL_DATABASE="$INSTANCE_NAME"
+fi
+
 #
 # initialize database
 #
@@ -41,5 +45,5 @@ fi
 
 echo "ALTER USER postgres WITH PASSWORD '$PSQL_PASSWORD';" | su postgres -c psql
 
-echo 'CREATE DATABASE "'"$INSTANCE_NAME"'"' | su postgres -c psql
-echo 'GRANT ALL PRIVILEGES ON DATABASE "'"$INSTANCE_NAME"'" TO "'"$APP_USER"'"' | su postgres -c psql
+echo 'CREATE DATABASE "'"$APP_PSQL_DATABASE"'"' | su postgres -c psql
+echo 'GRANT ALL PRIVILEGES ON DATABASE "'"$APP_PSQL_DATABASE"'" TO "'"$APP_USER"'"' | su postgres -c psql
