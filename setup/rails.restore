@@ -2,6 +2,8 @@ if [[ -f "$APP_PATH/runtime/restore.sh" ]] ; then
   cd "$APP_PATH/runtime"
   ./restore.sh
 else
+  su postgres -c "psql -d $APP_PSQL_DATABASE -c \"DROP SCHEMA public CASCADE;\""
+  su postgres -c "psql -d $APP_PSQL_DATABASE -c \"CREATE SCHEMA public;\""
   su postgres -c "psql -d $APP_PSQL_DATABASE -f \"$BACKUP_DIR/database.sql\""
   rm -Rf "$APP_PATH/runtime"
   cp -R "$BACKUP_DIR/storage" "$APP_PATH/runtime"
