@@ -2,4 +2,8 @@
 
 source ./variables 2> /dev/null
 
-echo "DROP DATABASE $INSTANCE_NAME" | su postgres -c psql
+if [[ -z "$APP_SQL_DATABASE" ]] ; then
+  export APP_SQL_DATABASE="$INSTANCE_NAME"
+fi
+
+echo "DROP DATABASE $APP_SQL_DATABASE" | su postgres -c psql
