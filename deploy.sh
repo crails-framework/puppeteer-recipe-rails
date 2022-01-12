@@ -3,12 +3,18 @@
 source ./variables 2> /dev/null
 
 cd "$APP_PATH"/runtime
+
 echo "- removing old sprockets-manifest file"
 rm public/assets/.sprockets-manifest-*.json || echo "-- no older sprockets-manifest file found"
-tar -xf "$BUILD_TARBALL"
 
+echo "- extracting build"
+tar -xf "$BUILD_TARBALL"
 chown -R "$APP_USER":"$APP_USER" "$APP_PATH"/runtime
 
+echo "- matching bundler version with the build's"
+gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
+
+echo "- updating application"
 su "$APP_USER" -c ". ../env && bundle install --path vendor/bundle"
 su "$APP_USER" -c ". ../env && bundle exec rake db:migrate"
 
