@@ -16,7 +16,10 @@ gem install bundler -v "$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -n 1)"
 
 echo "- updating application"
 su "$APP_USER" -c ". ../env && bundle install --path vendor/bundle"
-su "$APP_USER" -c ". ../env && bundle exec rake db:migrate"
+
+if [[ "$RAILS_SKIP_MIGRATE" != "1" ]] ; then
+  su "$APP_USER" -c ". ../env && bundle exec rake db:migrate"
+fi
 
 if [[ "$RAILS_SEED_ON_DEPLOY" == "1" ]] ; then
   su "$APP_USER" -c ". ../env && bundle exec rake db:seed"
