@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 source ./variables 2> /dev/null
 cd "$APP_PATH/runtime"
